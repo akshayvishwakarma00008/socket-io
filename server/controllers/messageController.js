@@ -3,7 +3,6 @@ const MessageModel = require('../model/messageModal')
 const getMessages = async (req, res, next) => {
     try {
         const { from, to } = req.body;
-        console.log("request.body",req.body);
         const messages = await MessageModel.find({
             users: {
                 $all: [from, to]

@@ -4,7 +4,8 @@ import App from "./App.jsx"
 import ChatConatainer from "./components/ChatContainer.jsx"
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  Navigate
 } from "react-router-dom";
 
 const router = createBrowserRouter(
@@ -15,7 +16,15 @@ const router = createBrowserRouter(
     },
     {
       path: "/chat/:id",
-      element:<ChatConatainer />
+      element: <ChatConatainer />
+    },
+    {
+      path: "/chat",
+      element: <Navigate to="/" replace />,
+    },
+    {
+      path: "*",
+      element: <Navigate to="/" replace />,
     }
   ]
 )

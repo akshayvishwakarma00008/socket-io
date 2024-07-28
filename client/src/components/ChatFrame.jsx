@@ -50,9 +50,11 @@ const ChatFrame = ({ socket, selectedContact, id }) => {
 
         return () => {
             if (socket.current) {
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 socket.current.off("message-received", handleMessageReceived);
             }
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -76,16 +78,16 @@ const ChatFrame = ({ socket, selectedContact, id }) => {
 
     return (
         <div>
-            <div className="relative w-full py-5 mt-10 text-gray-700 bg-white shadow-md rounded-xl">
-                <div className="absolute flex items-center justify-center w-full h-16 top-1 bg-slate-50">
+            <div className="relative w-full py-5 mt-10 text-gray-700 bg-white shadow-md rounded-xl h-[80vh]">
+                <div className="absolute top-0 flex items-center justify-center w-full h-16 bg-slate-50 rounded-t-xl">
                     {selectedContact?.username}
                 </div>
-                <div className="overflow-y-scroll md:h-[55vh] pt-16 custom-scrollbar">
+                <div className="max-h-[100%] pt-16 overflow-y-scroll custom-scrollbar relative">
                     {messages.map((data, index) => (
                         <Message text={data?.message} isSent={data?.isSent} key={index} />
                     ))}
                 </div>
-                <div className="px-5 py-4">
+                <div className="absolute bottom-0 w-full px-5 py-4 bg-slate-50 rounded-b-xl">
                     <ChatInput handleSendMessage={handleSendMessage} />
                 </div>
             </div>

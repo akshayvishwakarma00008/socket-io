@@ -4,9 +4,11 @@ const socketIo = require('socket.io')
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/userRoute")
 const messageRoutes = require("./routes/messageRoute")
+const cors = require('cors')
 
 const app = express()
 const server = http.createServer(app)
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
@@ -28,12 +30,10 @@ mongoose.connect("mongodb://localhost:27017/chat-application").then(() => {
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
-    console.log("client connected", socket.id);
     global.chatSocket = socket;
     socket.on("add-user", (userId) => {
         console.log(`[+] user - ${userId} added`)
         onlineUsers.set(userId, socket.id);
-        console.log("online users", onlineUsers);
         io.emit("user-added", userId);
         io.emit("active-users", Array.from(onlineUsers.entries()));
     })
@@ -41,10 +41,7 @@ io.on("connection", (socket) => {
 
     socket.on("send-message", (data) => {
         const sendUserSocket = onlineUsers.get(data.to);
-        console.log("data",data);
-        console.log("online users",onlineUsers)
         if (sendUserSocket) {
-            console.log("inside if");
             socket.to(sendUserSocket).emit("message-recieved", data.msg)
         }
 

@@ -12,7 +12,7 @@ const ChatInput = ({ handleSendMessage }) => {
     };
     return (
         <div>
-            <div className="flex items-center w-full gap-2 rounded-sm">
+            <div className="flex items-center w-full gap-2 rounded-xl">
                 <input
                     type="text"
                     placeholder="type your message here"

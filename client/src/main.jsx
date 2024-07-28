@@ -1,11 +1,27 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
-import Header from "./components/Header.jsx";
+import App from "./App.jsx"
+import ChatConatainer from "./components/ChatContainer.jsx"
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+    },
+    {
+      path: "/chat/:id",
+      element:<ChatConatainer />
+    }
+  ]
+)
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="max-w-7xl">
-    <Header />
-    <App />
+  <div>
+    <RouterProvider router={router} />
   </div>
 );

@@ -1,13 +1,16 @@
-import "./App.css";
-import {io} from "socket.io-client";
-import ChatContainer from "./components/ChatContainer";
+
+//import {io} from "socket.io-client";
+//import ChatContainer from "./components/ChatContainer";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  const socket = io("http://localhost:5000");
+  //const socket = io("http://localhost:5000");
   return (
-    <>
-      <ChatContainer socket={socket}/>
-    </>
+    <div className="flex justify-center">
+      {/* <ChatContainer socket={socket}/> */}
+      <HomePage/>
+
+    </div>
   );
 }
 
